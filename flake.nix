@@ -17,7 +17,7 @@
         {
           home-manager = {
             useGlobalPkgs = true;
-            useUserPkgs = true;
+            useUserPackages = true;
             users.daraghhollman = import ./home.nix;
             backupFileExtension = "backup";
           };
