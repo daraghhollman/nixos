@@ -30,9 +30,9 @@
       source = config.lib.file.mkOutOfStoreSymlink "/home/daraghhollman/nixos/config/hypr/";
       recursive = true;
     };
-  xdg.configFile."hypr/" =
+  xdg.configFile."kitty/" =
     {
-      source = config.lib.file.mkOutOfStoreSymlink "/home/daraghhollman/nixos/config/hypr/";
+      source = config.lib.file.mkOutOfStoreSymlink "/home/daraghhollman/nixos/config/kitty/";
       recursive = true;
     };
 
