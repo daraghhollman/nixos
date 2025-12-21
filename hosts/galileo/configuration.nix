@@ -8,10 +8,8 @@
 
   boot = {
     loader = {
-      grub = {
-        enable = true;
-        device = "/dev/sda";
-      };
+      systemd-boot.enable = true;
+      efi.canTouchEfiVariables = true;
     };
     kernelPackages = pkgs.linuxPackages_latest;
   };
