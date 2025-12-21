@@ -15,7 +15,6 @@
     enable = true;
     xwayland.enable = true;
   };
-  environment.pathsToLink = [ "/share/applications" "/share/xdg-desktop-portal" ];
 
 
   # Env variables
