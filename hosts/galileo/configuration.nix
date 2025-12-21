@@ -29,7 +29,6 @@
     printing.enable = true;
 
     pulseaudio.enable = false;
-    security.rtkit.enable = true;
     pipewire = {
       enable = true;
       alsa.enable = true;
@@ -37,6 +36,7 @@
       pulse.enable = true;
     };
   };
+  security.rtkit.enable = true;
 
   users.users.daraghhollman = {
     isNormalUser = true;
