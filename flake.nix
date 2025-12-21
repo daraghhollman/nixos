@@ -13,6 +13,15 @@
       system = "x86_64-linux";
       modules = [
         ./hosts/galileo/configuration.nix
+        home-manager.nixosModules.home-manager
+        {
+          home-manager = {
+            useGlobalPkgs = true;
+            useUserPkgs = true;
+            users.daraghhollman = import ./home.nix;
+            backupFileExtension = "backup";
+          };
+        }
       ];
     };
   };
