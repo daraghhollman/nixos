@@ -30,10 +30,22 @@
       source = config.lib.file.mkOutOfStoreSymlink "/home/daraghhollman/nixos/config/hypr/";
       recursive = true;
     };
+  xdg.configFile."hypr/" =
+    {
+      source = config.lib.file.mkOutOfStoreSymlink "/home/daraghhollman/nixos/config/hypr/";
+      recursive = true;
+    };
 
   # Packages
   home.packages = with pkgs;
     [
+      # Core
+      kitty
+
+      # Fonts
+      courier-prime
+
+      # Dev
       tmux
       neovim
     ];
