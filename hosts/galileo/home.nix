@@ -10,4 +10,24 @@
       test = "echo this is a test";
     };
   };
+
+  # Env variables
+  home.sessionVariables =
+    {
+      EDITOR = "nvim";
+    };
+
+  # Add dotfiles
+  xdg.configFile."hypr" =
+    {
+      source = config.lib.file.mkOutOfStoreSymlink "config/hypr";
+      recursive = true;
+    };
+
+  # Packages
+  home.packages = with pkgs;
+    [
+      tmux
+      neovim
+    ];
 }

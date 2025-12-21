@@ -13,7 +13,7 @@ nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
 Clone this repository
 ```shell
-git clone https://github.com/daraghhollman/nixos
+git clone --recurse-submodules https://github.com/daraghhollman/nixos
 ```
 
 Create a new build by copying a host

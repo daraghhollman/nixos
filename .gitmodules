@@ -1,0 +1,3 @@
+[submodule "config/hypr"]
+	path = config/hypr
+	url = https://github.com/daraghhollman/hypr
