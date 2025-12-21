@@ -18,7 +18,7 @@
           home-manager = {
             useGlobalPkgs = true;
             useUserPackages = true;
-            users.daraghhollman = import ./home.nix;
+            users.daraghhollman = import ./hosts/galileo/home.nix;
             backupFileExtension = "backup";
           };
         }
