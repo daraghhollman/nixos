@@ -20,7 +20,7 @@
   # Add dotfiles
   xdg.configFile."hypr/" =
     {
-      source = config.lib.file.mkOutOfStoreSymlink "../../config/hypr/";
+      source = config.lib.file.mkOutOfStoreSymlink "/home/daraghhollman/nixos/config/hypr/";
       recursive = true;
     };
 
