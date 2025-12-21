@@ -6,9 +6,6 @@
   home.stateVersion = "25.11";
   programs.bash = {
     enable = true;
-    shellAliases = {
-      test = "echo this is a test";
-    };
   };
 
   wayland.windowManager.hyprland = {
@@ -41,6 +38,7 @@
     [
       # Core
       kitty
+      pywal16
 
       # Fonts
       courier-prime
