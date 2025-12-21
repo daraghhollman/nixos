@@ -3,7 +3,7 @@
 {
   imports =
     [
-      ./hardware-configuration.nix
+      /etc/nixos/hardware-configuration.nix
     ];
 
   boot.loader.grub.enable = true;
@@ -60,7 +60,7 @@
     description = "Daragh Hollman";
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [
-    #  thunderbird
+      #  thunderbird
     ];
   };
 
@@ -70,8 +70,8 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-      vim
-      git
+    vim
+    git
   ];
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];

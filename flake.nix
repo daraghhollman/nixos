@@ -13,7 +13,6 @@
       system = "x86_64-linux";
       modules = [
         ./hosts/galileo/configuration.nix
-        /etc/nixos/hardware-configuration.nix
       ];
     };
   };
