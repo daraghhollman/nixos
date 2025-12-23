@@ -14,13 +14,6 @@
     xwayland.enable = true;
   };
 
-
-  # Env variables
-  home.sessionVariables =
-    {
-      EDITOR = "nvim";
-    };
-
   # Add dotfiles
   xdg.configFile."hypr/" =
     {
@@ -47,4 +40,9 @@
       tmux
       neovim
     ];
+
+  programs.git = {
+    userName = "daraghhollman";
+    userEmail = "hollmandaragh@gmail.com";
+  };
 }

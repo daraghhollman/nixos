@@ -4,6 +4,7 @@
   imports =
     [
       ./hardware-configuration.nix
+      ../../modules/display-managers/gdm.nix
     ];
 
   boot = {
