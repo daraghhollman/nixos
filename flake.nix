@@ -30,9 +30,10 @@
                 useGlobalPkgs = true;
                 useUserPackages = true;
 
-                home-manager.extraSpecialArgs = inputs // specialArgs;
-                home-manager.users.${username} = import ./users/${username}/home.nix;
+                extraSpecialArgs = inputs // specialArgs;
+                users.${username} = import ./users/${username}/home.nix;
                 backupFileExtension = "backup";
+
               };
             }
           ];
