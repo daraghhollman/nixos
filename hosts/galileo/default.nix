@@ -38,9 +38,6 @@
   };
   security.rtkit.enable = true;
 
-  # Display manager
-  services.displayManager.ly.enable = true;
-
   users.users.daraghhollman = {
     isNormalUser = true;
     description = "Daragh Hollman";
