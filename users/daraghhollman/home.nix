@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, split-monitor-workspaces, ... }:
 
 {
   home.username = "daraghhollman";
@@ -25,10 +25,12 @@
       recursive = true;
     };
 
-  # Hyprland plugins
-  wayland.windowManager.hyprland.plugins = [
-    pkgs.hyprlandPlugins.hyprsplit
-  ];
+  # Add plugins
+  wayland.windowManager.hyprland = {
+    plugins = [
+      split-monitor-workspaces.packages.${pkgs.system}.split-monitor-workspaces
+    ];
+  };
 
   # Packages
   home.packages = with pkgs;
