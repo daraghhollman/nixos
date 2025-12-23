@@ -6,6 +6,7 @@
       ./hardware-configuration.nix
       ../../modules/display-managers/sddm.nix
       ../../modules/window-managers/hypr.nix
+      ../../modules/bars/waybar.nix
     ];
 
   boot = {

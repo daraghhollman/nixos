@@ -19,6 +19,11 @@
       source = config.lib.file.mkOutOfStoreSymlink "/home/daraghhollman/nixos/config/kitty/";
       recursive = true;
     };
+  xdg.configFile."waybar/" =
+    {
+      source = config.lib.file.mkOutOfStoreSymlink "/home/daraghhollman/nixos/config/waybar/";
+      recursive = true;
+    };
 
   # Packages
   home.packages = with pkgs;
