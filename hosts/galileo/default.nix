@@ -4,7 +4,7 @@
   imports =
     [
       ./hardware-configuration.nix
-      ../../modules/display-managers/ly.nix
+      ../../modules/display-managers/sddm.nix
       ../../modules/window-managers/hypr.nix
     ];
 
