@@ -5,6 +5,7 @@
     [
       ./hardware-configuration.nix
       ../../modules/display-managers/ly.nix
+      ../../modules/window-managers/hypr.nix
     ];
 
   boot = {
