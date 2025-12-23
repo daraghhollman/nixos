@@ -14,7 +14,6 @@
 
   # Enable the rest of the ecosystem
   environment.systemPackages = with pkgs; [
-    hyprpm
     hyprlock
     hypridle
     hyprpaper
