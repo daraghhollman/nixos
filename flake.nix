@@ -1,5 +1,6 @@
 {
   description = "Daragh's NixOS config";
+
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-25.11";
     home-manager = {
@@ -9,20 +10,33 @@
   };
 
   outputs = { self, nixpkgs, home-manager, ... }: {
-    nixosConfigurations.galileo = nixpkgs.lib.nixosSystem {
-      system = "x86_64-linux";
-      modules = [
-        ./hosts/galileo/configuration.nix
-        home-manager.nixosModules.home-manager
-        {
-          home-manager = {
-            useGlobalPkgs = true;
-            useUserPackages = true;
-            users.daraghhollman = import ./hosts/galileo/home.nix;
-            backupFileExtension = "backup";
-          };
-        }
-      ];
+
+    nixosConfigurations = {
+      galileo =
+        let
+          username = "daraghhollman";
+          specialArgs = { inherit username; };
+        in
+        nixpkgs.lib.nixosSystem {
+          inherit specialArgs;
+          system = "x86_64-linux";
+
+          modules = [
+            ./hosts/galileo
+
+            home-manager.nixosModules.home-manager
+            {
+              home-manager = {
+                useGlobalPkgs = true;
+                useUserPackages = true;
+
+                home-manager.extraSpecialArgs = inputs // specialArgs;
+                home-manager.users.${username} = import ./users/${username}/home.nix;
+                backupFileExtension = "backup";
+              };
+            }
+          ];
+        };
     };
   };
 }
