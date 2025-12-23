@@ -25,6 +25,11 @@
       recursive = true;
     };
 
+  # Hyprland plugins
+  wayland.windowManager.hyprland.plugins = [
+    pkgs.hyprlandPlugins.hyprsplit
+  ];
+
   # Packages
   home.packages = with pkgs;
     [
