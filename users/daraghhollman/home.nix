@@ -41,8 +41,8 @@
       neovim
     ];
 
-  programs.git = {
-    userName = "daraghhollman";
-    userEmail = "hollmandaragh@gmail.com";
+  programs.git.settings.user = {
+    name = "daraghhollman";
+    email = "hollmandaragh@gmail.com";
   };
 }
