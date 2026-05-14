@@ -17,6 +17,10 @@
   # Networking
   networking.networkmanager.enable = true;
 
+  services.openssh = {
+    enable = true;
+  };
+
   # Locale & timezone
   time.timeZone = "Europe/Dublin";
   i18n.defaultLocale = "en_IE.UTF-8";
