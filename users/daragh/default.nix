@@ -10,7 +10,7 @@
 
     home.username = "daragh";
     home.homeDirectory = "/home/daragh";
-    home.stateVersion = "26.05";
+    home.stateVersion = "25.11";
 
     home.sessionVariables = {
       EDITOR="nvim";
