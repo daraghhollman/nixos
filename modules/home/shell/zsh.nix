@@ -17,8 +17,4 @@
       save = 10000;
     };
   };
-
-  home.sessionVariables = {
-    EDITOR = "nvim";
-  };
 }

@@ -31,7 +31,7 @@
   users.users.daragh = {
     isNormalUser = true;
     extraGroups = [ "wheel" "networkmanager" ];
-    shell = pkgs.bash;
+    shell = pkgs.zsh;
   };
 
   security.sudo.wheelNeedsPassword = true;
@@ -43,6 +43,9 @@
     wget
     vim
   ];
+
+  # Shells
+  programs.zsh.enable = true;
 
   # Flakes
   nix.settings.experimental-features = [ "nix-command" "flakes" ];

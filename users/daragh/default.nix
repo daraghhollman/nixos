@@ -50,7 +50,7 @@
       foot
       wmenu
       waybar
-	firefox
+      firefox
     ];
   };
 }
