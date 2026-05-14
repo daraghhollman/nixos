@@ -16,7 +16,10 @@
 
     # Helper function — given a hostname, builds a full nixosSystem config
     # It automatically imports ./hosts/<name>/default.nix
-    mkHost = name: nixpkgs.lib.nixosSystem {
+    pkgs = import nixpkgs { inherit system; };
+    nixosSystem = pkgs.lib.nixosSystem;
+
+    mkHost = name: nixosSystem {
       inherit system;
       modules = [
         home-manager.nixosModules.home-manager
