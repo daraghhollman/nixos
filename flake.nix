@@ -2,7 +2,7 @@
   description = "Daragh's NixOS Config";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
     home-manager = {
       url = "github:nix-community/home-manager/master";
@@ -16,10 +16,7 @@
 
     # Helper function — given a hostname, builds a full nixosSystem config
     # It automatically imports ./hosts/<name>/default.nix
-    pkgs = import nixpkgs { inherit system; };
-    nixosSystem = pkgs.lib.nixosSystem;
-
-    mkHost = name: nixosSystem {
+    mkHost = name: nixpkgs.lib.nixosSystem {
       inherit system;
       modules = [
         home-manager.nixosModules.home-manager
