@@ -45,8 +45,11 @@
     curl
     wget
     vim
+
+    # Monitoring
     htop
     btop
+    powertop
   ];
 
   # Shells
