@@ -26,7 +26,7 @@ in
 
   # DuckDNS
   age.secrets.duckdns-token = {
-    file = ../secrets/duckdns-token.age;
+    file = ../../../secrets/duckdns-token.age;
     mode = "0400";
     owner = "root";
   };
