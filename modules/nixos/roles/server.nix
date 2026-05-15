@@ -40,7 +40,7 @@ in
       Type = "oneshot";
       ExecStart = pkgs.writeShellScript "duckdns-update" ''
         TOKEN=$(cat ${config.age.secrets.duckdns-token.path})
-        DOMAIN="YOURSUBDOMAIN"
+        DOMAIN="daraghhollman.duckdns.org"
         ${pkgs.curl}/bin/curl -fsS \
           "https://www.duckdns.org/update?domains=$DOMAIN&token=$TOKEN&ip=" \
           -o /tmp/duckdns.log
