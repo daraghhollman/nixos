@@ -8,9 +8,6 @@
     ../../modules/nixos/roles/core.nix
     ../../modules/nixos/roles/server.nix
 
-    # Host extras
-    ../../modules/nixos/roles/media-server.nix
-
     # Users
     ../../users/daragh/default.nix
   ];
