@@ -15,4 +15,6 @@
   # Hostname
   networking.hostName = "curie";
   networking.hostId = "b4811afc";
+
+  boot.zfs.extraPools = [ "storage" ];
 }
