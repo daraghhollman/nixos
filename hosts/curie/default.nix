@@ -6,6 +6,7 @@
 
     # Host roles
     ../../modules/nixos/roles/core.nix
+    ../../modules/nixos/roles/server.nix
 
     # Users
     ../../users/daragh/default.nix
@@ -13,4 +14,5 @@
 
   # Hostname
   networking.hostName = "curie";
+  networking.hostId = "b4811afc";
 }
