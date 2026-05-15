@@ -19,6 +19,9 @@
 
   services.openssh = {
     enable = true;
+    settings = {
+      PasswordAuthentication = false;
+    };
   };
 
   # Locale & timezone
@@ -42,6 +45,8 @@
     curl
     wget
     vim
+    htop
+    btop
   ];
 
   # Shells
