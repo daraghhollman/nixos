@@ -9,8 +9,7 @@
     ../../modules/nixos/roles/server.nix
 
     # Host extras
-    ../../modules/services/photos.nix
-    # ../../modules/nixos/roles/media-server.nix
+    ../../modules/nixos/roles/media-server.nix
 
     # Users
     ../../users/daragh/default.nix
