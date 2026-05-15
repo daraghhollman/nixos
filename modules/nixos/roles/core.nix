@@ -23,6 +23,7 @@
       PasswordAuthentication = false;
     };
   };
+  programs.ssh.startAgent = true;
 
   # Locale & timezone
   time.timeZone = "Europe/Dublin";
