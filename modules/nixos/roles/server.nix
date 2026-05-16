@@ -64,7 +64,11 @@ in
     enable = true;
 
     virtualHosts = {
-
+      "https://daraghhollman.duckdns.org" = {
+        extraConfig = ''
+          redir https://daraghhollman.github.io permanent
+        '';
+      };
       "immich.daraghhollman.duckdns.org" = {
         extraConfig = ''
           reverse_proxy localhost:2283
