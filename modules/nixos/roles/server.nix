@@ -30,6 +30,16 @@ in
     mode = "0400";
     owner = "root";
   };
+  age.secrets.paperless-key = {
+    file = ../../../secrets/paperless-key.age;
+    mode = "0400";
+    owner = "paperless";
+  };
+  age.secrets.paperless-admin-password = {
+    file = ../../../secrets/paperless-admin-password.age;
+    mode = "0400";
+    owner = "paperless";
+  };
 
   # Cron to update ip for DuckDNS
   systemd.services.duckdns = {
@@ -74,6 +84,19 @@ in
           reverse_proxy localhost:2283
         '';
       };
+      "paperless.daraghhollman.duckdns.org" = {
+        extraConfig = ''
+          header {
+            Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+            X-Content-Type-Options "nosniff"
+            X-Frame-Options "SAMEORIGIN"
+            Referrer-Policy "strict-origin-when-cross-origin"
+            Permissions-Policy "geolocation=(), microphone=(), camera=()"
+            -Server
+          }
+          reverse_proxy localhost:${toString config.services.paperless.port}
+        '';
+      };
     };
   };
 
@@ -90,5 +113,28 @@ in
     host = "0.0.0.0";
     openFirewall = true;
     mediaLocation = "/mnt/media/immich";
+  };
+
+  services.paperless = {
+    enable = true;
+    port = 28981;
+    address = "127.0.0.1";
+    dataDir = "/mnt/media/paperless/data";
+    mediaDir = "/mnt/media/paperless/media";
+    consumptionDir = "/mnt/media/paperless/consume";
+
+    passwordFile = config.age.secrets.paperless-admin-password.path;
+
+    settings = {
+      PAPERLESS_SECRET_KEY_FILE = config.age.secrets.paperless-key.path;
+      PAPERLESS_URL = "https://paperless.daraghhollman.duckdns.org";
+      PAPERLESS_CSRF_TRUSTED_ORIGINS = "https://paperless.daraghhollman.duckdns.org";
+      PAPERLESS_ALLOWED_HOSTS = "paperless.daraghhollman.duckdns.org,localhost,127.0.0.1";
+      PAPERLESS_SESSION_COOKIE_SECURE = true;
+      PAPERLESS_CSRF_COOKIE_SECURE = true;
+      PAPERLESS_OCR_LANGUAGE = "eng";
+      PAPERLESS_FILENAME_FORMAT = "{created_year}/{correspondent}/{title}";
+      PAPERLESS_ACCOUNT_LOGIN_ATTEMPTS_LIMIT = 5;
+    };
   };
 }
