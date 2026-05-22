@@ -84,6 +84,11 @@ in
           reverse_proxy localhost:2283
         '';
       };
+      "jellyfin.daraghhollman.duckdns.org" = {
+        extraConfig = ''
+          reverse_proxy localhost:8920
+        '';
+      };
       "paperless.daraghhollman.duckdns.org" = {
         extraConfig = ''
           header {
@@ -136,5 +141,9 @@ in
       PAPERLESS_FILENAME_FORMAT = "{created_year}/{correspondent}/{title}";
       PAPERLESS_ACCOUNT_LOGIN_ATTEMPTS_LIMIT = 5;
     };
+  };
+
+  services.jellyfin = {
+    enable = true;
   };
 }
