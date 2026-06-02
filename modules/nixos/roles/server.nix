@@ -102,6 +102,11 @@ in
           reverse_proxy localhost:${toString config.services.paperless.port}
         '';
       };
+      "chessstack.daraghhollman.duckdns.org" = {
+        extraConfig = ''
+          reverse_proxy localhost:3000
+        '';
+      };
     };
   };
 
@@ -146,4 +151,64 @@ in
   services.jellyfin = {
     enable = true;
   };
+
+  # Chessstack — chess opening spaced repetition trainer
+  virtualisation.oci-containers = {
+    backend = "docker";
+    containers = {
+      chessstack-postgres = {
+        image = "postgres:17-alpine";
+        environment = {
+          POSTGRES_DB = "chessstack";
+          POSTGRES_USER = "chessstack";
+          POSTGRES_PASSWORD = "chessstack_secret"; # change this
+        };
+        volumes = [
+          "chessstack-pgdata:/var/lib/postgresql/data"
+        ];
+        extraOptions = [
+          "--network=chessstack-net"
+          "--health-cmd=pg_isready -U chessstack"
+          "--health-interval=10s"
+          "--health-timeout=5s"
+          "--health-retries=5"
+        ];
+      };
+
+      chessstack-app = {
+        image = "ghcr.io/pvttwinkle/chessstack:latest";
+        ports = [ "127.0.0.1:3000:3000" ];
+        environment = {
+          DATABASE_URL = "postgresql://chessstack:chessstack_secret@chessstack-postgres:5432/chessstack";
+          ORIGIN = "https://chessstack.daraghhollman.duckdns.org";
+          DEFAULT_USERNAME = "admin";
+          DEFAULT_PASSWORD = "changeme"; # change before first boot
+          REGISTRATION_MODE = "invite";
+        };
+        dependsOn = [ "chessstack-postgres" ];
+        extraOptions = [
+          "--network=chessstack-net"
+        ];
+      };
+    };
+  };
+
+  # Create the Docker network for Chessstack containers
+  systemd.services.init-chessstack-network = {
+    description = "Create chessstack Docker network";
+    after = [ "docker.service" ];
+    requires = [ "docker.service" ];
+    wantedBy = [ "multi-user.target" ];
+    serviceConfig = {
+      Type = "oneshot";
+      RemainAfterExit = true;
+    };
+    script = ''
+      ${pkgs.docker}/bin/docker network inspect chessstack-net \
+        || ${pkgs.docker}/bin/docker network create chessstack-net
+    '';
+  };
+
+  # Ensure docker is enabled
+  virtualisation.docker.enable = true;
 }
