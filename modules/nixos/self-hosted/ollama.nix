@@ -5,7 +5,7 @@
     enable = true;
     package = pkgs.ollama-cpu;
 
-    loadModels = [ "qwen2.5-coder:7b" ];
+    loadModels = [ "qwen2.5-coder:7b" "deepseek-coder-v2:lite" "llama3.1" ];
   };
 
   services.open-webui = {
