@@ -17,6 +17,10 @@ let
   );
 in
 {
+  imports = [
+    ../self-hosted/ollama.nix
+  ];
+
   # Note this might jump back and forth as kernels are added or removed.
   boot.kernelPackages = latestKernelPackage;
 
@@ -77,6 +81,11 @@ in
       "https://daraghhollman.duckdns.org" = {
         extraConfig = ''
           redir https://daraghhollman.github.io permanent
+        '';
+      };
+      "ollama.daraghhollman.duckdns.org" = {
+        extraConfig = ''
+          reverse_proxy localhost:8080
         '';
       };
       "immich.daraghhollman.duckdns.org" = {
