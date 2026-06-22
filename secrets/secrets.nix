@@ -7,4 +7,5 @@ in
   "duckdns-token.age".publicKeys = [ kepler-daraghhollman curie-root ];
   "paperless-key.age".publicKeys = [ kepler-daraghhollman curie-root ];
   "paperless-admin-password.age".publicKeys = [ kepler-daraghhollman curie-root ];
+  "firefly-app-key.age".publicKeys     = [ kepler-daraghhollman curie-root ];
 }

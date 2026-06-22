@@ -18,7 +18,7 @@ let
 in
 {
   imports = [
-    ../self-hosted/ollama.nix
+    ../self-hosted/firefly.nix
   ];
 
   # Note this might jump back and forth as kernels are added or removed.
@@ -95,7 +95,7 @@ in
       };
       "jellyfin.daraghhollman.duckdns.org" = {
         extraConfig = ''
-          reverse_proxy localhost:8920
+          reverse_proxy localhost:8096
         '';
       };
       "paperless.daraghhollman.duckdns.org" = {

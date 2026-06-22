@@ -51,6 +51,9 @@
     htop
     btop
     powertop
+
+    #
+    openssl
   ];
 
   # Shells
