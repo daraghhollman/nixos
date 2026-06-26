@@ -220,4 +220,12 @@ in
 
   # Ensure docker is enabled
   virtualisation.docker.enable = true;
+
+  # Backup crons
+  services.cron = {
+    enable = true;
+    systemCronJobs = [
+      "0 0 * * * /home/daragh/scripts/manual-backup /mnt/data/backups/kepler-live /mnt/data/backups/kepler-archive > /mnt/data/backups/kepler-archive/log"
+    ];
+  };
 }
