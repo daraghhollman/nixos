@@ -226,7 +226,7 @@ in
   services.cron = {
     enable = true;
     systemCronJobs = [
-      "0 0 * * * /home/daragh/scripts/manual-backup /mnt/data/backups/kepler-live /mnt/data/backups/kepler-archive > /mnt/data/backups/kepler-archive/log"
+      "0 0 * * * daragh /home/daragh/scripts/manual-backup /mnt/data/backups/kepler-live /mnt/data/backups/kepler-archive > /mnt/data/backups/kepler-archive/log"
     ];
   };
 }
