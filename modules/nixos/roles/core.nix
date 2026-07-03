@@ -31,13 +31,6 @@
 
   console.keyMap = "ie";
 
-  # User
-  users.users.daragh = {
-    isNormalUser = true;
-    extraGroups = [ "wheel" "networkmanager" ];
-    shell = pkgs.zsh;
-  };
-
   security.sudo.wheelNeedsPassword = true;
 
   # Packages

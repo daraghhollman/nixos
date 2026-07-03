@@ -1,6 +1,12 @@
 { config, pkgs, ... }:
 
 {
+  users.users.daragh = {
+    isNormalUser = true;
+    extraGroups = [ "wheel" "networkmanager" ];
+    shell = pkgs.zsh;
+  };
+
   home-manager.users.daragh = {
     imports = [
       ../../modules/home/shell/zsh.nix
@@ -14,7 +20,7 @@
     home.stateVersion = "25.11";
 
     home.sessionVariables = {
-      EDITOR="nvim";
+      EDITOR = "nvim";
     };
 
     # Daragh's personal sway config

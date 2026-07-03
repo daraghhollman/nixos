@@ -38,7 +38,7 @@
         ];
       };
 
-      hosts = [ "kepler" "curie" ];
+      hosts = [ "curie" ];
 
     in
     {

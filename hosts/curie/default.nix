@@ -10,6 +10,7 @@
 
     # Users
     ../../users/daragh/default.nix
+    ../../users/luca/default.nix
   ];
 
   # Hostname
