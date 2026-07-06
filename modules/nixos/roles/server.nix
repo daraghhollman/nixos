@@ -19,6 +19,7 @@ in
 {
   imports = [
     ../self-hosted/firefly.nix
+    ../self-hosted/vikunja.nix
     ../self-hosted/transmission-openvpn.nix
   ];
 
