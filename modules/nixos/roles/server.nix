@@ -21,6 +21,7 @@ in
     ../self-hosted/firefly.nix
     ../self-hosted/vikunja.nix
     ../self-hosted/transmission-openvpn.nix
+    ../self-hosted/bepi-region-predictions.nix
   ];
 
   # Note this might jump back and forth as kernels are added or removed.
@@ -83,11 +84,6 @@ in
       "https://daraghhollman.duckdns.org" = {
         extraConfig = ''
           redir https://daraghhollman.github.io permanent
-        '';
-      };
-      "ollama.daraghhollman.duckdns.org" = {
-        extraConfig = ''
-          reverse_proxy localhost:8080
         '';
       };
       "immich.daraghhollman.duckdns.org" = {
