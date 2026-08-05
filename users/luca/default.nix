@@ -3,6 +3,7 @@
 {
   users.users.luca = {
     isNormalUser = true;
+    extraGroups = [ "dail-leargas" "systemd-journal" ];
   };
 
   home-manager.users.luca = {

@@ -15,6 +15,8 @@ let
       builtins.attrValues zfsCompatibleKernelPackages
     )
   );
+
+  duckdnsDomains = [ "daraghhollman" "dail-leargas" ];
 in
 {
   imports = [
@@ -22,6 +24,7 @@ in
     ../self-hosted/vikunja.nix
     ../self-hosted/transmission-openvpn.nix
     ../self-hosted/bepi-region-predictions.nix
+    ../self-hosted/dail-leargas.nix
   ];
 
   # Note this might jump back and forth as kernels are added or removed.
@@ -57,9 +60,9 @@ in
       Type = "oneshot";
       ExecStart = pkgs.writeShellScript "duckdns-update" ''
         TOKEN=$(cat ${config.age.secrets.duckdns-token.path})
-        DOMAIN="daraghhollman.duckdns.org"
+        DOMAINS="${lib.concatStringsSep "," duckdnsDomains}"
         ${pkgs.curl}/bin/curl -fsS \
-          "https://www.duckdns.org/update?domains=$DOMAIN&token=$TOKEN&ip=" \
+          "https://www.duckdns.org/update?domains=$DOMAINS&token=$TOKEN&ip=" \
           -o /tmp/duckdns.log
         cat /tmp/duckdns.log
       '';
