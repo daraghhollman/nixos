@@ -58,6 +58,9 @@
   # Allow proprietary packages
   nixpkgs.config.allowUnfree = true;
 
+  # Auto optimise store storage
+  nix.optimise.automatic = true;
+
   system.stateVersion = "25.11";
 
 }
