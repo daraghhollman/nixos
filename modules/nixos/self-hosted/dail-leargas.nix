@@ -46,7 +46,10 @@ let
   '';
 
   runScript = pkgs.writeShellScript "dail-leargas-run" ''
-    ${pkgs.uv}/bin/uv run waitress-serve --port 8502 --call app:run
+    cd "${repoDir}"
+    exec "${venvDir}/bin/waitress-serve" \
+      --port=8502 \
+      --call app:run
   '';
 
   commonHardening = {
