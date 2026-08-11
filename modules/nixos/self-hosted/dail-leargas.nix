@@ -67,6 +67,10 @@ in
       "https://dail-leargas.duckdns.org" = {
         extraConfig = ''
           reverse_proxy localhost:8502
+          log {
+            output file /var/log/caddy/dail-leargas.duckdns.org.log
+            format json
+          }
         '';
       };
     };

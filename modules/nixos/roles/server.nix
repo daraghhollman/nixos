@@ -25,6 +25,7 @@ in
     ../self-hosted/transmission-openvpn.nix
     ../self-hosted/bepi-region-predictions.nix
     ../self-hosted/dail-leargas.nix
+    ../self-hosted/goaccess.nix
   ];
 
   # Note this might jump back and forth as kernels are added or removed.

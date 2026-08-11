@@ -119,6 +119,10 @@ in
       "https://bepicolombo.daraghhollman.duckdns.org" = {
         extraConfig = ''
           reverse_proxy localhost:8501
+          log {
+            output file /var/log/caddy/bepicolombo.daraghhollman.duckdns.org.log
+            format json
+          }
         '';
       };
     };
