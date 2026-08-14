@@ -3,6 +3,7 @@
 let
   logDir = "/var/log/caddy";
   statsDir = "/var/www/stats";
+  geoipDir = "/var/lib/GeoIP";
 
   # List every site you want tracked. Each one gets its own log file
   # and its own GoAccess report.
@@ -26,6 +27,7 @@ let
           --log-format=CADDY \
           -o "${statsDir}/${site}.html" \
           --ignore-crawlers \
+          --geoip-database=${geoipDir}/GeoLite2-City.mmdb \
           -a
         echo "<li><a href=\"${site}.html\">${site}</a></li>" >> "$index"
       fi
@@ -36,6 +38,13 @@ let
   '';
 in
 {
+  age.secrets."GeoIP.conf" = {
+    file = ../../../secrets/geoip.env.age;
+    owner = "root";
+    group = "root";
+    mode = "0400";
+  };
+
   services.caddy = {
     enable = true;
 
@@ -57,9 +66,36 @@ in
     chown caddy:caddy ${logDir}
   '';
 
-  # GoAccess report generation, on a timer
-  environment.systemPackages = [ pkgs.goaccess ];
+  environment.systemPackages = [
+    pkgs.goaccess
+    pkgs.geoipupdate
+    pkgs.goaccess
+  ];
 
+  systemd.services.geoip-update = {
+    description = "Update GeoLite2 databases via geoipupdate";
+    serviceConfig = {
+      Type = "oneshot";
+      ExecStart = "${pkgs.geoipupdate}/bin/geoipupdate -f ${config.age.secrets."GeoIP.conf".path} -d ${geoipDir}";
+      User = "root"; # needs to read the agenix secret and write to geoipDir
+    };
+  };
+  systemd.timers.geoip-update = {
+    description = "Run geoipupdate daily";
+    wantedBy = [ "timers.target" ];
+    timerConfig = {
+      OnBootSec = "1m";
+      OnUnitActiveSec = "1d";
+      Unit = "geoip-update.service";
+    };
+  };
+  system.activationScripts.geoipDir = ''
+    mkdir -p ${geoipDir}
+    chown root:caddy ${geoipDir}
+    chmod 750 ${geoipDir}
+  '';
+
+  # GoAccess report generation, on a timer
   systemd.services.goaccess-reports = {
     description = "Generate GoAccess HTML reports for all Caddy sites";
     serviceConfig = {
