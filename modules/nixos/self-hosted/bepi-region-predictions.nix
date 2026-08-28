@@ -22,6 +22,7 @@ let
   homeDir = "${stateDir}/home";
 
   setupScript = pkgs.writeShellScript "streamlit-app-setup" ''
+    set -euo pipefail
     # Clone if repo doesn't exist
     if [ ! -d "${repoDir}/.git" ]; then
       ${pkgs.git}/bin/git clone --branch "${repoBranch}" --depth 1 --recurse-submodules --shallow-submodules \
@@ -88,8 +89,6 @@ in
 
   systemd.services.streamlit-app = {
     description = "Streamlit web application";
-    after = [ "streamlit-app-setup.service" ];
-    requires = [ "streamlit-app-setup.service" ];
     wantedBy = [ "multi-user.target" ];
 
     serviceConfig = commonHardening // {
