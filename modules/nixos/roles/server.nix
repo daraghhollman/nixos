@@ -20,8 +20,6 @@ let
 in
 {
   imports = [
-    ../self-hosted/firefly.nix
-    ../self-hosted/vikunja.nix
     ../self-hosted/transmission-openvpn.nix
     ../self-hosted/bepi-region-predictions.nix
     ../self-hosted/dail-leargas.nix
