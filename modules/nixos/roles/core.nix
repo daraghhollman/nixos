@@ -13,6 +13,7 @@
     efiSupport = true;
   };
   boot.loader.efi.canTouchEfiVariables = true;
+  boot.loader.grub.memtest86.enable = true;
 
   # Networking
   networking.networkmanager.enable = true;

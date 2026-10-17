@@ -18,7 +18,4 @@
   networking.hostId = "b4811afc";
 
   boot.zfs.extraPools = [ "storage" ];
-
-  # Fan control modules
-  boot.kernelModules = [ "coretemp" "nct6775" ];
 }
