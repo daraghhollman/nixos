@@ -12,6 +12,7 @@
       ../../modules/home/shell/zsh.nix
       ../../modules/home/gui/sway.nix
       ../../modules/home/editor/nvim.nix
+      ../../modules/home/file-explorer/yazi.nix
       ../../modules/home/terminal/tmux.nix
     ];
 
