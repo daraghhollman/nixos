@@ -36,6 +36,7 @@
 
   # Packages
   environment.systemPackages = with pkgs; [
+    # Usage
     git
     curl
     wget
@@ -43,10 +44,9 @@
 
     # Monitoring
     htop
-    btop
     powertop
 
-    #
+    # Misc.
     openssl
   ];
 
