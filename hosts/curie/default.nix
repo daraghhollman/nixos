@@ -18,4 +18,6 @@
   networking.hostId = "b4811afc";
 
   boot.zfs.extraPools = [ "storage" ];
+
+  boot.crashDump.enable = true;
 }
