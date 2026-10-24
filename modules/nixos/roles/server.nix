@@ -24,6 +24,7 @@ in
     ../self-hosted/bepi-region-predictions.nix
     ../self-hosted/dail-leargas.nix
     ../self-hosted/goaccess.nix
+    ../self-hosted/bookorbit.nix
     ../roles/media/audiobookshelf.nix
   ];
 
