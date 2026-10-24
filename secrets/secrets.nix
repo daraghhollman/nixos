@@ -4,12 +4,11 @@ let
   curie-daragh = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIB+xeOpDqe/8w370YhvbQBzidZcIeZRp53C1FkUASQhf daragh@curie";
 in
 {
-  "duckdns-token.age".publicKeys = [ kepler-daraghhollman curie-root ];
-  "paperless-key.age".publicKeys = [ kepler-daraghhollman curie-root ];
-  "paperless-admin-password.age".publicKeys = [ kepler-daraghhollman curie-root ];
-  "firefly-app-key.age".publicKeys     = [ kepler-daraghhollman curie-root ];
-  "bookorbit-env.age".publicKeys = [ kepler-daraghhollman curie-root ];
-
-  "proton-env.age".publicKeys = [ kepler-daraghhollman curie-root ];
-  "geoip.env.age".publicKeys = [ kepler-daraghhollman curie-root ]; 
+  "duckdns-token.age".publicKeys = [ curie-daragh kepler-daraghhollman curie-root ];
+  "paperless-key.age".publicKeys = [ curie-daragh kepler-daraghhollman curie-root ];
+  "paperless-admin-password.age".publicKeys = [ curie-daragh kepler-daraghhollman curie-root ];
+  "firefly-app-key.age".publicKeys     = [ curie-daragh kepler-daraghhollman curie-root ];
+  "bookorbit-env.age".publicKeys = [ curie-daragh kepler-daraghhollman curie-root ];
+  "proton-env.age".publicKeys = [ curie-daragh kepler-daraghhollman curie-root ];
+  "geoip.env.age".publicKeys = [ curie-daragh kepler-daraghhollman curie-root ]; 
 }
