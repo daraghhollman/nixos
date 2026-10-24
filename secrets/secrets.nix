@@ -8,6 +8,8 @@ in
   "paperless-key.age".publicKeys = [ kepler-daraghhollman curie-root ];
   "paperless-admin-password.age".publicKeys = [ kepler-daraghhollman curie-root ];
   "firefly-app-key.age".publicKeys     = [ kepler-daraghhollman curie-root ];
+  "bookorbit-env.age".publicKeys = [ kepler-daraghhollman curie-root ];
+
   "proton-env.age".publicKeys = [ kepler-daraghhollman curie-root ];
   "geoip.env.age".publicKeys = [ kepler-daraghhollman curie-root ]; 
 }
