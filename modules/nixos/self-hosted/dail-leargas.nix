@@ -77,6 +77,7 @@ in
       StateDirectory = stateDirName;
       WorkingDirectory = stateDir;
       ExecStart = "${setupScript}";
+      ExecStartPost = "+${pkgs.systemd}/bin/systemctl try-restart --no-block dail-leargas.service";
       ReadWritePaths = [ stateDir ];
       Environment = [
         "HOME=${homeDir}"
@@ -89,17 +90,15 @@ in
     description = "Dail Leargas update timer";
     wantedBy = [ "timers.target" ];
     timerConfig = {
-      # Runs at midnight every weekday
-      OnCalendar = "0 0 * * 2-6";
-      Persistent = true; #
+      # Runs at the end of every weekday
+      OnCalendar = "Tue..Sat *-*-* 00:00:00";
+      Persistent = true;
       Unit = "dail-leargas-updater.service";
     };
   };
 
   systemd.services.dail-leargas = {
     description = "Dail Leargas App";
-    after = [ "dail-leargas-updater.service" ];
-    requires = [ "dail-leargas-updater.service" ];
     wantedBy = [ "multi-user.target" ];
 
     serviceConfig = commonHardening // {
