@@ -4,11 +4,6 @@ let
   repoUrl = "https://github.com/Lucahollman/dail-leargas";
   repoBranch = "main";
 
-  initCommands = ''
-    export PATH="${pkgs.uv}/bin:$PATH"
-    ${pkgs.uv}/bin/uv run ./python/populator.py
-  '';
-
   stateDirName = "dail-leargas";
   stateDir = "/var/lib/${stateDirName}";
   repoDir = "${stateDir}/repo";
@@ -17,7 +12,7 @@ let
   # Streamlit caches to a homedir
   homeDir = "${stateDir}/home";
 
-  setupScript = pkgs.writeShellScript "dail-leargas-setup" ''
+  setupScript = pkgs.writeShellScript "dail-leargas-updater" ''
     # Clone if repo doesn't exist
     if [ ! -d "${repoDir}/.git" ]; then
       ${pkgs.git}/bin/git clone --branch "${repoBranch}" \
@@ -30,10 +25,6 @@ let
     cd "${repoDir}"
     mkdir -p "${homeDir}"
 
-    # Build the venv from uv.lock. --frozen refuses to update the lockfile,
-    # so the environment is exactly what's committed to the repo. This
-    # runs BEFORE initCommands so any init/download scripts that use
-    # `uv run` have a venv to run against.
     export HOME="${homeDir}"
     export PATH="${pkgs.git}/bin:$PATH"
     export UV_PROJECT_ENVIRONMENT="${venvDir}"
@@ -42,7 +33,8 @@ let
 
     ${pkgs.uv}/bin/uv sync --frozen --no-dev
 
-    ${initCommands}
+    export PATH="${pkgs.uv}/bin:$PATH"
+    ${pkgs.uv}/bin/uv run ./python/populator.py
   '';
 
   runScript = pkgs.writeShellScript "dail-leargas-run" ''
@@ -76,13 +68,12 @@ in
     };
   };
 
-  systemd.services.dail-leargas-setup = {
-    description = "Dail Leargas Setup";
+  systemd.services.dail-leargas-updater = {
+    description = "Dail Leargas Updater";
     serviceConfig = commonHardening // {
       User = "dail-leargas";
       Group = "dail-leargas";
       Type = "oneshot";
-      RemainAfterExit = true;
       StateDirectory = stateDirName;
       WorkingDirectory = stateDir;
       ExecStart = "${setupScript}";
@@ -94,10 +85,21 @@ in
     };
   };
 
+  systemd.timers.dail-leargas-updater = {
+    description = "Dail Leargas update timer";
+    wantedBy = [ "timers.target" ];
+    timerConfig = {
+      # Runs at midnight every weekday
+      OnCalendar = "0 0 * * 2-6";
+      Persistent = true; #
+      Unit = "dail-leargas-updater.service";
+    };
+  };
+
   systemd.services.dail-leargas = {
     description = "Dail Leargas App";
-    after = [ "dail-leargas-setup.service" ];
-    requires = [ "dail-leargas-setup.service" ];
+    after = [ "dail-leargas-updater.service" ];
+    requires = [ "dail-leargas-updater.service" ];
     wantedBy = [ "multi-user.target" ];
 
     serviceConfig = commonHardening // {
@@ -139,7 +141,7 @@ in
           var unit = action.lookup("unit");
 
           if (unit == "dail-leargas.service" ||
-              unit == "dail-leargas-setup.service") {
+              unit == "dail-leargas-updater.service") {
             return polkit.Result.YES;
           }
         }
